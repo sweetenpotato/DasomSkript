@@ -2,6 +2,17 @@ command /testjob [<integer>]:
 	trigger:
 		set {GUI::직업GUI::%player%::레벨::광부} to arg-1
 
+# 색상
+options:
+	네임컬러: <##80A6FF>
+	로어컬러1: <##80FFA6>
+	로어컬러2: <##62D9B5>
+	스킬네임: <##5D80FF>
+	스킬로어: <##8593C6>
+	스킬제한: <##7ABD8C>
+	뒤로가기: <##FF6997>
+
+# 직업 선택 창 GUI
 function 직업GUI(p: player):
 	suppress variable save warning
 	set {GUI::직업GUI::%{_p}%} to a new chest inventory with 6 rows with name "%{_g}% 길드GUI"
@@ -39,17 +50,10 @@ function 직업GUI(p: player):
 		set slot {_slot} of {GUI::직업GUI::%{_p}%} to loop-value
 	open {GUI::직업GUI::%{_p}%} to {_p}
 	
-	================================================================================
-options:
-	네임컬러: <##80A6FF>
-	로어컬러1: <##80FFA6>
-	로어컬러2: <##62D9B5>
-	스킬네임: <##5D80FF>
-	스킬로어: <##8593C6>
-	스킬제한: <##7ABD8C>
-	뒤로가기: <##FF6997>
+
+
 	
-	
+# 광부 GUI
 function 광부GUI(p: player):
 	suppress variable save warning
 	if {GUI::직업GUI::%{_p}%::경험치::광부} is not set:
