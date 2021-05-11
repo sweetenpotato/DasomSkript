@@ -1,0 +1,351 @@
+command /testjob [<integer>]:
+	trigger:
+		set {GUI::직업GUI::%player%::레벨::광부} to arg-1
+
+function 직업GUI(p: player):
+	suppress variable save warning
+	set {GUI::직업GUI::%{_p}%} to a new chest inventory with 6 rows with name "%{_g}% 길드GUI"
+	resetInventory("GUI::직업GUI::%{_p}%::슬롯", 6)
+	set {GUI::직업GUI::%{_p}%::슬롯::4} to wooden pickaxe named "{@네임컬러}직업" with lore "{@로어컬러1}직업을 선택하세요!", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::20} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::22} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::24} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::38} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::40} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	set {GUI::직업GUI::%{_p}%::슬롯::42} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	loop {GUI::직업GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::직업GUI::%{_p}%} to loop-value
+	open {GUI::직업GUI::%{_p}%} to {_p}
+	
+	if {GUI::직업GUI::%{_p}%::레벨::광부} is not set:
+		set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 0:
+		set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}광부 전직" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[전직하기(클릭)]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 1:
+		if {GUI::직업GUI::%{_p}%::직업} is not set:
+			set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}초보 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " ", "{@로어컬러2}[승급하기(클릭)]" and "&4※승급시 다른 직업은 승급할 수 없습니다!"
+		else:
+			set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}초보 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " ", "{@로어컬러2}&7[승급불가]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 2:
+		set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}중수 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[승급하기(클릭)]"	
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 3:
+		set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}고수 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[승급하기(클릭)]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 4:
+		set {GUI::직업GUI::%{_p}%::슬롯::0} to wooden pickaxe named "{@네임컬러}장인 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}최고레벨입니다."
+
+	loop {GUI::직업GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::직업GUI::%{_p}%} to loop-value
+	open {GUI::직업GUI::%{_p}%} to {_p}
+	
+	================================================================================
+options:
+	네임컬러: <##80A6FF>
+	로어컬러1: <##80FFA6>
+	로어컬러2: <##62D9B5>
+	스킬네임: <##5D80FF>
+	스킬로어: <##8593C6>
+	스킬제한: <##7ABD8C>
+	뒤로가기: <##FF6997>
+	
+	
+function 광부GUI(p: player):
+	suppress variable save warning
+	if {GUI::직업GUI::%{_p}%::경험치::광부} is not set:
+		set {GUI::직업GUI::%{_p}%::경험치::광부} to 0
+		set {GUI::직업GUI::%{_p}%::경험치::농부} to 0
+		set {GUI::직업GUI::%{_p}%::경험치::목수} to 0
+		set {GUI::직업GUI::%{_p}%::경험치::사냥꾼} to 0
+		set {GUI::직업GUI::%{_p}%::경험치::어부} to 0
+
+		
+	set {GUI::직업GUI::GUI} to hopper inventory named "%{_p}%님의 직업레벨"
+				
+	if {GUI::직업GUI::%{_p}%::레벨::광부} is not set:
+		set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}광부로서의 삶" with lore "{@로어컬러1}첫 거래자로 광부를 선택합니다.", "{@로어컬러1}(광부 lv.1 상점 해금)", " " and "{@로어컬러2}신중히 선택해주세요!"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 0:
+		set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}광부 전직" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[전직하기(클릭)]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 1:
+		if {GUI::직업GUI::%{_p}%::직업} is not set:
+			set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}초보 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " ", "{@로어컬러2}[승급하기(클릭)]" and "&4※승급시 다른 직업은 승급할 수 없습니다!"
+		else:
+			set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}초보 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " ", "{@로어컬러2}&7[승급불가]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 2:
+		set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}중수 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[승급하기(클릭)]"	
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 3:
+		set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}고수 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}[승급하기(클릭)]"
+	else if {GUI::직업GUI::%{_p}%::레벨::광부} is 4:
+		set {GUI::직업GUI::슬롯::0} to wooden pickaxe named "{@네임컬러}장인 광부" with lore "{@로어컬러1}보유중인 직업경험치: &f%{GUI::직업GUI::%{_p}%::경험치::광부}%", "{@로어컬러1}직업 경험치: %{GUI::직업GUI::%{_p}%::경험치::광부}%/%{GUI::직업GUI::%{_p}%::전체경험치::광부}%", " " and "{@로어컬러2}최고레벨입니다."
+	
+	set {GUI::직업GUI::%{_p}%::슬롯::11} to golden apple named "{@네임컬러}체력 스킬" with lore "{@로어컬러1}클릭시 체력 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::12} to bread named "{@네임컬러}음식 스킬" with lore "{@로어컬러1}클릭시 음식 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::13} to netherite sword named "{@네임컬러}무기 스킬" with lore "{@로어컬러1}클릭시 무기 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::14} to diamond chestplate named "{@네임컬러}방어구 스킬" with lore "{@로어컬러1}클릭시 방어구 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::15} to diamond boots named "{@네임컬러}이동 스킬" with lore "{@로어컬러1}클릭시 이동 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::21} to golden hoe named "{@네임컬러}농사 스킬" with lore "{@로어컬러1}클릭시 농사 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::22} to iron pickaxe named "{@네임컬러}도구 스킬" with lore "{@로어컬러1}클릭시 도구 스킬트리창을 엽니다."
+	set {GUI::직업GUI::%{_p}%::슬롯::23} to redstone named "{@네임컬러}특별 스킬" with lore "{@로어컬러1}클릭시 특별 스킬트리창을 엽니다."
+	
+	loop {GUI::직업GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::직업GUI::%{_p}%} to loop-value
+	open {GUI::직업GUI::%{_p}%} to {_p}
+	
+function 스킬변환GUI(p: player):
+	suppress variable save warning
+	set {GUI::스킬변환GUI::%{_p}%} to a new chest inventory with 5 rows with name "스킬 경험치 변환 GUI"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::13} to skull of {_p} named "{@네임컬러}스킬 경험치 변환 GUI" with lore "{@로어컬러1}보유중인 스킬포인트: &f%{스킬::%{_p}%::포인트}%", "{@로어컬러1}가지고있는 xp를 스킬 경험치로 변환합니다.", " " and "{@로어컬러2}스킬XP: %{스킬::현재경험치::%{_p}%}%/%{스킬::전체경험치::%{_p}%}%"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::27} to player head with nbt "{SkullOwner:{Id:[I;-695422209,1550403056,-1924338895,-1012731414],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzQ5ZDI3MWM1ZGY4NGY4YTNjOGFhNWQxNTQyN2Y2MjgzOTM0MWRhYjUyYzYxOWE1OTg3ZDM4ZmJlMThlNDY0In19fQ==""}]}}}" named "&c-100xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::28} to player head with nbt "{SkullOwner:{Id:[I;-1141415757,1604076718,-1471543564,827102046],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWRmNWMyZjg5M2JkM2Y4OWNhNDA3MDNkZWQzZTQyZGQwZmJkYmE2ZjY3NjhjODc4OWFmZGZmMWZhNzhiZjYifX19""}]}}}" named "&c-10xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::29} to player head with nbt "{SkullOwner:{Id:[I;926389047,1642875479,-1476774291,-479207819],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjFmNWZmZmM2ZWYyODcyNGZiOWEwYzExMGQ5ZmE3ZDIzMGUzYWY1ZTkyMjk3ZTNkNjJkZjQ1MjcxYWUxZjQifX19""}]}}}" named "&c-1xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::31} to nether star named "{@네임컬러}%{스킬투자::%{_p}%}%xp 변환"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::33} to player head with nbt "{SkullOwner:{Id:[I;309705442,718488699,-1080498364,932215804],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjJkMTQ1YzkzZTVlYWM0OGE2NjFjNmYyN2ZkYWZmNTkyMmNmNDMzZGQ2MjdiZjIzZWVjMzc4Yjk5NTYxOTcifX19""}]}}}" named "&a+1xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::34} to player head with nbt "{SkullOwner:{Id:[I;-1957755250,-1155773134,-1310279980,1782423677],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjUyN2ViYWU5ZjE1MzE1NGE3ZWQ0OWM4OGMwMmI1YTlhOWNhN2NiMTYxOGQ5OTE0YTNkOWRmOGNjYjNjODQifX19""}]}}}" named "&a+10xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::35} to player head with nbt "{SkullOwner:{Id:[I;52839116,-179814034,-1783536278,237371388],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZmI0YzFkYmQ4NTQ0Y2ZhZWQ5NjNkZjRkMTM5YmM4YmFjNGI3NmFjNGJiYjMwYWI4NmY3NmZiYzMxYWI5YTcwIn19fQ==""}]}}}" named "&a+100xp"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::41} to player head with nbt "{SkullOwner:{Id:[I;-202800316,35341805,-1474957780,547030027],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2RhOGI2NDczMDUyYWRhMjJlNmNhMzBjNDlmNmRjZTliOTk5MTZlNDIzYWM0ZmM2YjMwMWFkNzMzNjk3ZiJ9fX0=""}]}}}" named "&a확인"
+	set {GUI::스킬변환GUI::%{_p}%::슬롯::39} to player head with nbt "{SkullOwner:{Id:[I;-1344645285,-1406319228,-1945687972,-1461570268],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjEyYzdhZmVhNDhlNTMzMjVlNTEyOTAzOGE0NWFlYzUxYWZlMjU2YWJjYTk0MWI2YmM4MjA2ZmFlMWNlZiJ9fX0=""}]}}}" named "&c취소"
+	loop {GUI::스킬변환GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::스킬변환GUI::%{_p}%} to loop-value
+	if {스킬투자::%{_p}%} is not set:
+		set {스킬투자::%{_p}%} to 0
+	open {GUI::스킬변환GUI::%{_p}%} to {_p}
+
+function 체력직업GUI(p: player):
+	suppress variable save warning
+	add "체력증가", "상처엔후시딘", "아이쿠아파라", "선빵필승", "전략적후퇴", "필사즉생필생즉사", "급속힐키트" and "두개의심장" to {_loop::*}
+	loop {_loop::*}:
+		if {스킬::체력::%{_p}%::%loop-value%} is not set:
+			set {스킬::체력::%{_p}%::%loop-value%} to 0
+	set {GUI::체력직업GUI::%{_p}%} to a new chest inventory with 6 rows with name "%{_p}% 체력 스킬 GUI"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::0} to barrier named "{@뒤로가기}뒤로가기"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::4} to player head with nbt "{SkullOwner:{Id:[I;-288562697,30297737,-1181982143,1917041928],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmM4ZmI2MzdkNmUxYTdiYThmYTk3ZWU5ZDI5MTVlODQzZThlYzc5MGQ4YjdiZjYwNDhiZTYyMWVlNGQ1OWZiYSJ9fX0=""}]}}}" named "{@스킬네임}체력 증가" with lore "{@스킬로어}당신은 남들보다 체력이 뛰어납니다.", "{@스킬로어}레벨*1의 추가 체력이 주어집니다.", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::체력증가}% / 20"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::11} to player head with nbt "{SkullOwner:{Id:[I;1030262902,46157297,-1464774994,-177525832],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDY2YTVmN2JjZDNjMWMyMjVhOTM2NmVlZTZkZmFiMWNjNjZhNmJmNzM2M2ZlZDA4NzUxMmU2ZWY0N2ExZCJ9fX0=""}]}}}" named "{@스킬네임}상처엔 후시딘" with lore "{@스킬로어}이정도 상처야 침 바르면 낫지!", "{@스킬로어}스킬레벨이 높아질수록 회복속도가 늘어나고 더 빨리 배고파집니다.", "{@스킬제한}체력 증가 Lv.5 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::상처엔후시딘}% / 3"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::13} to iron boots named "{@스킬네임}아이쿠 아파라!" with lore "{@스킬로어}당신은 아픈걸 싫어합니다.", "{@스킬로어}데미지를 입을 시 순간적으로 이동속도가 빨라집니다.", "{@스킬제한}체력 증가 Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::아이쿠아파라}% / 5"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::22} to glowing golden boots named "{@스킬네임}전략적 후퇴" with lore "{@스킬로어}칫, 두고보자! 다음엔 꼭 이 빚을 갚아주마!", "{@스킬로어}피가 5칸 이하로 떨어질 시 레벨*10초간 이동속도가 빨라집니다.", "{@스킬제한}체력 증가 Lv.5 이상, 아이쿠 아파라! Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::전략적후퇴}% / 3"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::25} to stone sword named "{@스킬네임}선빵필승!" with lore "{@스킬로어}먼저 치는 놈이 이기는건 동서고금의 진리입니다.", "{@스킬로어}피가 가득 찬 상태에서 상대를 공격할 시 레벨*5%%의 추가 피해를 줍니다.", "{@스킬제한}체력 증가 Lv.7 이상, 상처엔 후시딘 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::선빵필승}% / 10"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::28} to cooked porkchop named "{@스킬네임}급속 힐키트" with lore "{@스킬로어}싸우다말고 뭘 먹냐고요? 원래 배가 든든해야 더 잘 싸우는 법입니다!" , "{@스킬로어}피가 (+레벨)칸 이하로 남았을 때 음식을 먹는 쿨타임이 삭제됩니다.", "{@스킬로어}단 이 때 먹은 아이템은 체력을 2칸, 배고픔을 1칸만 회복시킵니다.", "{@스킬제한}체력 증가 Lv.3 이상, 아이쿠 아파라! Lv.1 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::급속힐키트}% / 3"
+	set {GUI::체력직업GUI::%{_p}%::슬롯::31} to bone named "{@스킬네임}필사즉생 필생즉사" with lore "{@스킬로어}죽고자 하면 살 것이고, 살고자 하면 죽을 것이다.", "{@스킬로어}피가 레벨*0.5칸 이하일 시 레벨*2초간 무적이 되고 공격의 넉백거리가 증가합니다.", "{@스킬제한}아이쿠 아파라! Lv.5 이상, 전략적 후퇴 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::필사즉생필생즉사}% / 2"
+
+	set {GUI::체력직업GUI::%{_p}%::슬롯::40} to glowing sunflower named "{@스킬네임}두 개의 심장" with lore "{@스킬로어}체력이 높은 이유가 있었군요. 심장을 두 개나 달고있으니 그렇죠.", "{@스킬로어}체력이 0 이하로 내려가면 죽는 대신 제자리에서 부활합니다.", "{@스킬로어}단, 연속으로 두 번의 기회는 없습니다.", "{@스킬제한}체력 증가 Lv.10 이상, 상처엔 후시딘 Lv.3 이상, 필사즉생 필생즉사 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%{_p}%::두개의심장}% / 1"
+	
+	loop {GUI::체력직업GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::체력직업GUI::%{_p}%} to loop-value
+	open {GUI::체력직업GUI::%{_p}%} to {_p}
+
+function 음식직업GUI(p: player):
+	suppress variable save warning
+	add "소식형인간", "강철위장", "플라시보", "자린고비" and "뉴턴의법칙" to {_loop::*}
+	loop {_loop::*}:
+		if {스킬::음식::%{_p}%::%loop-value%} is not set:
+			set {스킬::음식::%{_p}%::%loop-value%} to 0
+	set {GUI::음식직업GUI::%{_p}%} to a new chest inventory with 6 rows with name "%{_p}% 음식 스킬 GUI"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::0} to barrier named "{@뒤로가기}뒤로가기"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::4} to ghast tear named "{@스킬네임}소식형 인간" with lore "{@스킬로어}당신은 남들보다 적게 먹고도 배불러합니다.", "{@스킬로어}음식 섭취시 레벨*20%%의 확률로 배고픔을 1칸 더 회복합니다.", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::소식형인간}% / 10"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::25} to cod named "{@스킬네임}자린고비" with lore "{@스킬로어}밥 한숟갈에 굴비 한 번만 보라고 했지!", "{@스킬로어}음식을 소모할 확률이 레벨*5%% 줄어듭니다.", "{@스킬제한} 뉴턴의 법칙 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::자린고비}% / 10"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::15} to apple named "{@스킬네임}뉴턴의 법칙" with lore "{@스킬로어}아야! 당신의 머리 위로 뭔가가 떨어졌습니다.", "{@스킬로어}음식 섭취시 레벨*5%%의 확률로 랜덤한 음식 아이템을 얻습니다.", "{@스킬제한}강철 위장 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::뉴턴의법칙}% / 5"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::13} to glass bottle named "{@스킬네임}플라시보" with lore "{@스킬로어}내가 방금 마신게 포션이었나? 물이었나?" , "{@스킬로어}물병 섭취시 레벨*20%% 확률로 랜덤한 상태이상에 걸립니다.", "{@스킬제한}소식형 인간 Lv.5 이상, 강철 위장 Lv.1 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::플라시보}% / 5"
+	set {GUI::음식직업GUI::%{_p}%::슬롯::11} to rotten flesh named "{@스킬네임}강철 위장" with lore "{@스킬로어}튼튼한 위장, 강력한 소화력!", "{@스킬로어}(1레벨)거미 눈, 썩은 살점과 (2레벨)복어를 섭취할 시", "{@스킬로어}패널티가 사라지고 가끔 긍정적 효과가 나타납니다.", "{@스킬제한}소식형 인간 Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::강철위장}% / 2"
+	loop {GUI::음식직업GUI::%{_p}%::슬롯::*}:
+		set {_slot} to loop-index parsed as integer
+		set slot {_slot} of {GUI::음식직업GUI::%{_p}%} to loop-value
+	open {GUI::음식직업GUI::%{_p}%} to {_p}
+	
+	
+on inventory click:
+	if {GUI::직업GUI::*} contains player's current inventory:
+		cancel event
+		set {_slot} to clicked slot
+		if {_slot} is 4:
+			close player's inventory
+			스킬변환GUI(player)
+		if {_slot} is 11:
+			close player's inventory
+			체력직업GUI(player)
+		if {_slot} is 12:
+			close player's inventory
+			음식직업GUI(player)
+		
+	if {GUI::스킬변환GUI::*} contains player's current inventory:
+		cancel event
+		if {스킬투자::%player%} is not set:
+			set {스킬투자::%player%} to 0
+		set {_slot} to clicked slot
+		
+		if {_slot} is 27:
+			remove 100 from {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+		if {_slot} is 28:
+			remove 10 from {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+		if {_slot} is 29:
+			remove 1 from {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+		
+		if {_slot} is 33:
+			add 1 to {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+		if {_slot} is 34:
+			add 10 to {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+		if {_slot} is 35:
+			add 100 to {스킬투자::%player%}
+			set slot 31 of {GUI::스킬변환GUI::%player%} to nether star named "{@네임컬러}%{스킬투자::%player%}%xp 변환"
+			
+		if {_slot} is 39:
+			close player's inventory
+			직업GUI(player)
+			
+		if {_slot} is 41:
+			close player's inventory
+			set {스킬투자::%player%} to {스킬투자::%player%} parsed as integer
+			if {스킬투자::%player%} < 0:
+				message " &c음수의 xp는 변환할 수 없습니다!" to player
+				stop
+			else if {스킬투자::%player%} > player's total xp:
+				message " &c보유중인 xp가 부족합니다!" to player
+				stop
+			else:
+				remove {스킬투자::%player%} from player's total xp
+				add {스킬투자::%player%} to {스킬::현재경험치::%player%}
+				message " &a%{스킬투자::%player%}%xp가 스킬xp로 변환되었습니다!" to player
+				delete {스킬투자::%player%}
+				set {_s} to true
+				while {_s} is true:
+					if {스킬::현재경험치::%player%} >= {스킬::전체경험치::%player%}:
+						remove {스킬::전체경험치::%player%} from {스킬::현재경험치::%player%}
+						add 1 to {스킬::%player%::포인트}
+						set {스킬::전체경험치::%player%} to round down ({스킬::전체경험치::%player%} * 1.1)
+						message " &a스킬포인트가 1 증가하였습니다!" to player
+					if {스킬::현재경험치::%player%} < {스킬::전체경험치::%player%}:
+						set {_s} to false
+				stop
+	
+	if {GUI::체력직업GUI::*} contains player's current inventory:
+		cancel event
+		set {_slot} to clicked slot
+		if {_slot} is 0:
+			close player's inventory
+			직업GUI(player)
+		if {_slot} is 4:
+			{스킬::%player%::포인트} > 0
+			{스킬::체력::%player%::체력증가} < 20
+			add 1 to {스킬::체력::%player%::체력증가}
+			remove 1 from {스킬::%player%::포인트}
+			set player's max health to (10 + {스킬::체력::%player%::체력증가})
+			set slot 4 of {GUI::체력직업GUI::%player%} to player head with nbt "{SkullOwner:{Id:[I;-288562697,30297737,-1181982143,1917041928],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmM4ZmI2MzdkNmUxYTdiYThmYTk3ZWU5ZDI5MTVlODQzZThlYzc5MGQ4YjdiZjYwNDhiZTYyMWVlNGQ1OWZiYSJ9fX0=""}]}}}" named "{@스킬네임}체력 증가" with lore "{@스킬로어}당신은 남들보다 체력이 뛰어납니다.", "{@스킬로어}레벨*1의 추가 체력이 주어집니다.", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%player%::체력증가}% / 20"
+		if {_slot} is 11:
+			{스킬::%player%::포인트} > 0
+			{스킬::체력::%player%::체력증가} >= 5
+			{스킬::체력::%player%::상처엔후시딘} < 3
+			add 1 to {스킬::체력::%player%::상처엔후시딘}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 11 of {GUI::체력직업GUI::%player%} to player head with nbt "{SkullOwner:{Id:[I;1030262902,46157297,-1464774994,-177525832],Properties:{textures:[{Value:""eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNDY2YTVmN2JjZDNjMWMyMjVhOTM2NmVlZTZkZmFiMWNjNjZhNmJmNzM2M2ZlZDA4NzUxMmU2ZWY0N2ExZCJ9fX0=""}]}}}" named "{@스킬네임}상처엔 후시딘" with lore "{@스킬로어}이정도 상처야 침 바르면 낫지!", "{@스킬로어}스킬레벨이 높아질수록 회복속도가 늘어나고 더 빨리 배고파집니다.", "{@스킬제한}체력 증가 Lv.5 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%player%::상처엔후시딘}% / 3"
+		if {_slot} is 13:
+			{스킬::%player%::포인트} > 0
+			{스킬::체력::%player%::체력증가} >= 3
+			{스킬::체력::%player%::아이쿠아파라} < 5
+			add 1 to {스킬::체력::%player%::아이쿠아파라}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 15 of {GUI::체력직업GUI::%player%} to iron boots named "{@스킬네임}아이쿠 아파라!" with lore "{@스킬로어}당신은 아픈걸 싫어합니다.", "{@스킬로어}데미지를 입을 시 순간적으로 이동속도가 빨라집니다.", "{@스킬제한}체력 증가 Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%player%::아이쿠아파라}% / 5"
+		if {_slot} is 22:
+			{스킬::%player%::포인트} > 0
+			{스킬::체력::%player%::체력증가} >= 5
+			{스킬::체력::%player%::아이쿠아파라} >= 3
+			{스킬::체력::%player%::전략적후퇴} < 3
+			add 1 to {스킬::체력::%player%::전략적후퇴}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 22 of {GUI::체력직업GUI::%player%} to glowing golden boots named "{@스킬네임}전략적 후퇴" with lore "{@스킬로어}칫, 두고보자! 다음엔 꼭 이 빚을 갚아주마!", "{@스킬로어}피가 5칸 이하로 떨어질 시 레벨*10초간 이동속도가 빨라집니다.", "{@스킬제한}체력 증가 Lv.5 이상, 아이쿠 아파라! Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%player%::전략적후퇴}% / 3"
+		if {_slot} is 25:
+			{스킬::%player%::포인트} > 0
+			{스킬::체력::%player%::체력증가} >= 7
+			{스킬::체력::%player%::상처엔후시딘} >= 2
+			{스킬::체력::%player%::선빵필승} < 10
+			add 1 to {스킬::체력::%player%::선빵필승}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 25 of {GUI::체력직업GUI::%player%} to stone sword named "{@스킬네임}선빵필승!" with lore "{@스킬로어}먼저 치는 놈이 이기는건 동서고금의 진리입니다.", "{@스킬로어}피가 가득 찬 상태에서 상대를 공격할 시 레벨*5%%의 추가 피해를 줍니다.", "{@스킬제한}체력 증가 Lv.7 이상, 상처엔 후시딘 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::체력::%player%::선빵필승}% / 10"
+
+	if {GUI::음식직업GUI::*} contains player's current inventory:
+		cancel event
+		set {_slot} to clicked slot
+		if {_slot} is 0:
+			close player's inventory
+			직업GUI(player)
+		if {_slot} is 4:
+			{스킬::%player%::포인트} > 0
+			{스킬::음식::%player%::소식형인간} < 10
+			add 1 to {스킬::음식::%player%::소식형인간}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 4 of {GUI::음식직업GUI::%player%} to ghast tear named "{@스킬네임}소식형 인간" with lore "{@스킬로어}당신은 남들보다 적게 먹고도 배불러합니다.", "{@스킬로어}음식 섭취시 레벨*20%%의 확률로 배고픔을 1칸 더 회복합니다.", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%player%::소식형인간}% / 10"
+		if {_slot} is 11:
+			{스킬::%player%::포인트} > 0
+			{스킬::음식::%player%::소식형인간} >= 3
+			{스킬::음식::%player%::강철위장} < 2
+			add 1 to {스킬::음식::%player%::강철위장}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 11 of {GUI::음식직업GUI::%player%} to rotten flesh named "{@스킬네임}강철 위장" with lore "{@스킬로어}튼튼한 위장, 강력한 소화력!", "{@스킬로어}(1레벨)거미 눈, 썩은 살점과 (2레벨)복어를 섭취할 시", "{@스킬로어}패널티가 사라지고 가끔 긍정적 효과가 나타납니다.", "{@스킬제한}소식형 인간 Lv.3 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%player%::강철위장}% / 2"
+		if {_slot} is 13:
+			{스킬::%player%::포인트} > 0
+			{스킬::음식::%player%::소식형인간} >= 5
+			{스킬::음식::%player%::강철위장} >= 1
+			{스킬::음식::%player%::플라시보} < 5
+			add 1 to {스킬::음식::%player%::플라시보}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 13 of {GUI::음식직업GUI::%player%} to glass bottle named "{@스킬네임}플라시보" with lore "{@스킬로어}내가 방금 마신게 포션이었나? 물이었나?" , "{@스킬로어}물병 섭취시 레벨*20%% 확률로 랜덤한 상태이상에 걸립니다.", "{@스킬제한}소식형 인간 Lv.5 이상, 강철 위장 Lv.1 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%player%::플라시보}% / 5"
+		if {_slot} is 15:
+			{스킬::%player%::포인트} > 0
+			{스킬::음식::%player%::강철위장} >= 2
+			{스킬::음식::%player%::뉴턴의법칙} < 5
+			add 1 to {스킬::음식::%player%::뉴턴의법칙}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 15 of {GUI::음식직업GUI::%player%} to apple named "{@스킬네임}뉴턴의 법칙" with lore "{@스킬로어}아야! 당신의 머리 위로 뭔가가 떨어졌습니다.", "{@스킬로어}음식 섭취시 레벨*5%%의 확률로 랜덤한 음식 아이템을 얻습니다.", "{@스킬제한}강철 위장 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%player%::뉴턴의법칙}% / 5"
+		if {_slot} is 25:
+			{스킬::%player%::포인트} > 0
+			{스킬::음식::%player%::뉴턴의법칙} >= 2
+			{스킬::음식::%player%::자린고비} < 10
+			add 1 to {스킬::음식::%player%::자린고비}
+			remove 1 from {스킬::%player%::포인트}
+			set slot 25 of {GUI::음식직업GUI::%player%} to cod named "{@스킬네임}자린고비" with lore "{@스킬로어}밥 한숟갈에 굴비 한 번만 보라고 했지!", "{@스킬로어}음식을 소모할 확률이 레벨*5%% 줄어듭니다.", "{@스킬제한} 뉴턴의 법칙 Lv.2 이상", "&8클릭시 레벨업합니다.", " " and "{@스킬로어}레벨: &f%{스킬::음식::%{_p}%::자린고비}% / 10"
+
+			
+		
+on inventory close:
+	if {GUI::스킬변환GUI::*} contains player's current inventory:
+		delete {GUI::스킬변환GUI::%player%::*}
+		wait 1 tick
+		{GUI::스킬변환GUI::*} does not contain player's current inventory
+		delete {스킬투자::%player%}
+	if {GUI::체력직업GUI::*} contains player's current inventory:
+		delete {GUI::체력직업GUI::%player%::*}
+	if {GUI::음식직업GUI::*} contains player's current inventory:
+		delete {GUI::음식직업GUI::%player%::*}
+		
+
+
+
+
+
+
+
+		
+on inventory click:
+	if {GUI::직업GUI::*} contains player's current inventory:
+		cancel event
+		set {_slot} to clicked slot
+		if {_slot} is 0:
+			send component {GUI::직업GUI::광부} to player
+			close player's inventory
+		if {_slot} is 1:
+			send component {GUI::직업GUI::농부} to player
+			close player's inventory
+		if {_slot} is 2:
+			send component {GUI::직업GUI::목수} to player
+			close player's inventory
+		if {_slot} is 3:
+			send component {GUI::직업GUI::사냥꾼} to player
+			close player's inventory
+		if {_slot} is 4:
+			send component {GUI::직업GUI::어부} to player
+			close player's inventory
